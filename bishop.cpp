@@ -23,17 +23,12 @@ bool Bishop::isValidMove(Piece***board, Position destiny){
 
 	if (fabs(this->position.getY()-destiny.getY())==fabs(this->position.getX()-destiny.getX())){
 		
-
-
-
-	
 		if (this->getColor() == 'B'){
 			if(this->position.getY() > destiny.getY() && this->position.getX()>destiny.getX()){
 				//si la posicion esta en un punto bajo y se quiere mover a la izquierda
 				contadorY=this->position.getY();
 				contadorX=this->position.getY();
 				
-
 				while(true){
 					if (board[contadorY][contadorX] == NULL){
 						contadorY--;
@@ -45,7 +40,6 @@ bool Bishop::isValidMove(Piece***board, Position destiny){
 					if(contadorX == destiny.getX() || contadorY==destiny.getY()){
 						break;
 					}
-
 
 				}
 				return true;

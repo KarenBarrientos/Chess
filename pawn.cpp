@@ -11,33 +11,46 @@ using namespace std;
 Pawn::Pawn(char color, int x, int y):Piece(color,x,y){//constructor
 	firstMove = true;
 }
+
 bool Pawn::isValidMove(Piece*** board, Position destiny){
 	int diffY = abs(position.getY()-destiny.getY());
 	if(color == 'N'){
 		int diffX = position.getX()-destiny.getX();
-		if((diffY==1&&diffX==0) || (diffY==2&&firstMove&&diffX==0)){ //primer movimiento o movimiento hacia adelante
-			if(board[destiny.getY()][destiny.getX()] == NULL)
+		if((diffY==1 && diffX==0) || (diffY == 2 && firstMove && diffX==0)){ //primer movimiento o movimiento hacia adelante
+			if(board[destiny.getY()][destiny.getX()] == NULL){
+				firstMove = false; // solo podra moverse 2 espacios
 				return true;
+			}
+			if(board[destiny.getY()][destiny.getX()] != NULL){
+				return false;
+			}//Validacion que no se coma nada delante de el 
 			return false;
 		}
-		else if((diffY==1&&diffX==1)){
-			if(board[destiny.getY()][destiny.getX()]->getColor() != color) //comer en diagonal
-				return true;
+		else 
+			if((diffY==1 && diffX==1)){
+				if(board[destiny.getY()][destiny.getX()]->getColor() != color) //comer en diagonal
+					return true;
 			return false;
 		}
 		else{
 			return false;
 		}
-	} else if(color == 'B'){
+	} else 
+	if(color == 'B'){
 		int diffX = destiny.getX()-position.getX();
-		if((diffY==1&&diffX==0) || (diffY==2&&firstMove&&diffX==0)){ //primer movimiento o movimiento hacia adelante
-			if(board[destiny.getY()][destiny.getX()] == NULL)
+		if((diffY==1 && diffX==0) || (diffY==2 && firstMove && diffX==0)){ //primer movimiento o movimiento hacia adelante
+			if(board[destiny.getY()][destiny.getX()] == NULL){
+				firstMove = false; // solo podra moverse 2 espacios
 				return true;
-			return false;
+			}
+			if(board[destiny.getY()][destiny.getX()] != NULL){
+				return false;
+			}//Validacion que no se coma nada delante de el 
 		}
-		else if((diffY==1&&diffX==1)){
-			if(board[destiny.getY()][destiny.getX()]->getColor() != color) //comer en diagonal
-				return true;
+		else 
+			if((diffY==1 && diffX==1)){
+				if(board[destiny.getY()][destiny.getX()]->getColor() != color) //comer en diagonal
+					return true;
 			return false;
 		}
 		else{
@@ -45,6 +58,7 @@ bool Pawn::isValidMove(Piece*** board, Position destiny){
 		}
 	}
 }
+
 bool Pawn::moveTo(Piece*** board, Position destiny){
 	if(isValidMove(board,destiny)){
 		board[position.getY()][position.getX()] = NULL;

@@ -28,6 +28,7 @@ bool Knight::isValidMove(Piece*** board, Position destiny){
 	else
 		return false;
 }//si el moviemiento es valido
+
 bool Knight::moveTo(Piece*** board, Position destiny){
 	if(isValidMove(board,destiny)){
 		board[position.getY()][position.getX()] = NULL;
