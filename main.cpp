@@ -282,6 +282,8 @@ void guardarPartidaJugada(Piece*** tablero){
 		for (int j = 0; j < 8; ++j)	{
 			if(tablero[i][j] != NULL){
 				archivo << "[" << tablero[i][j]->toString() << "]";
+			}else{
+				archivo << "[ ]";
 			}
 		}
 		archivo << letras[i] << endl;
